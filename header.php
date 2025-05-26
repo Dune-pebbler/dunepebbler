@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+    <meta name="facebook-domain-verification" content="9dn5oa8127q8fqmhcvz37lwqaq7e4x" />
+     <?php if(get_post_type() == 'vacature'): ?>
+      <script type="application/ld+json">
+        {
+          "@context" : "https://schema.org/",
+          "@type" : "JobPosting",
+          "title" : "<?php the_title(); ?>",
+          "description" : "<p><?= get_field('intro'); ?></p>",
+          "identifier": {
+            "@type": "PropertyValue",
+            "name": "Dune Pebbler"
+          },
+          "datePosted" : "<?= date_i18n("Y-m-d", get_the_date("U")); ?>",
+          "validThrough" : "<?= date_i18n("Y-m-d", strtotime('+1 year', strtotime($post->post_modified))); ?>",
+          "employmentType" : "<?= get_field('dienstverband') ? get_field('dienstverband') : "FULL_TIME"; ?>",
+          "hiringOrganization" : {
+            "@type" : "Organization",
+            "name" : "Dune Pebbler",
+            "sameAs" : "https://dunepebbler.nl",
+            "logo" : "https://dunepebbler.nl/wp-content/themes/dunepebbler/img/Dune_pebbler_logo.png"
+          },
+          "jobLocation": {
+          "@type": "Place",
+            "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Maessloot 6",
+            "addressLocality": "Rijnsburg",
+            "addressRegion": "ZH",
+            "postalCode": "2231 PX",
+            "addressCountry": "NL"
+            }
+          },
+          "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "EUR",
+            "value": {
+              "@type": "QuantitativeValue",
+              <?php if(get_field('min_salary_value') || get_field('max_salary_value')): ?>
+                <?php if( get_field('min_salary_value') ): ?>
+                  "minValue": "<?= get_field('min_salary_value'); ?>",
+                <?php endif; ?>
+                <?php if( get_field('max_salary_value') ): ?>
+                  "maxValue": "<?= get_field('max_salary_value'); ?>",
+                <?php endif; ?>
+                "unitText": "MONTH"
+              <?php else: ?>
+                "value": "CAO",
+                "unitText": "MONTH"
+              <?php endif; ?>
+            }
+          }
+        } 
+      </script>
+      <?php # endif; ?>
+    <?php endif; ?>
+    
+    <link rel="icon" href="favicon.ico">
+    <title><?php wp_title(); ?></title>
+    <?php $video_url= get_field('video')['url'];; ?>
+    <link rel="preconnect" href="<?php echo esc_url( dirname( $video_url ) ); ?>" />
+    <link rel="preconnect" href="https://use.typekit.net" />
+    <link rel="preload" href="https://use.typekit.net/vpa3esl.css" as="style">
+    <link rel="stylesheet" href="https://use.typekit.net/vpa3esl.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!--<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300,500&display=swap" rel="stylesheet">-->
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo get_template_directory_uri(); ?>/stylesheets/bootstrap/bootstrap.css" rel="stylesheet"> 
+    <link href="<?php echo get_template_directory_uri(); ?>/assets/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo get_template_directory_uri(); ?>/assets/bxslider/bxslider.css" rel="stylesheet">
+    <link href="<?php echo get_template_directory_uri(); ?>/assets/owlcarousel/owl.carousel.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="<?php echo get_template_directory_uri() . '/stylesheets/style.css?v=' . filemtime(get_template_directory() . '/stylesheets/style.css'); ?>" rel="stylesheet">
+    <script>
+      var ajaxurl = '<?php echo admin_url('admin-ajax.php') ?>';
+      var postTitle = "<?php the_title(); ?>";
+    </script>
+    <?php wp_head(); ?>  
+  </head>
+  <body <?php body_class(); ?>>
+    <header>
+      <nav class="navigation">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <?php
+              wp_nav_menu(array(
+                  'theme_location' => 'home',
+                  'menu_class' => 'main-nav'
+              ));
+              ?>
+              <?php get_template_part('part-social-icons'); ?>
+            </div>
+            <div class="col ">
+              <?php
+              wp_nav_menu(array(
+                  'theme_location' => 'wat',
+                  'menu_class' => 'main-nav'
+              ));
+              ?>
+            </div>
+            <div class="col ignore-colors">
+              <?php
+              wp_nav_menu(array(
+                  'theme_location' => 'wie',
+                  'menu_class' => 'main-nav'
+              ));
+              ?>
+            </div>
+            <div class="col">
+              <?php
+              wp_nav_menu(array(
+                  'theme_location' => 'rest',
+                  'menu_class' => 'main-nav'
+              ));
+              ?>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="flags">
+              <ul>
+                <?php language_selector_flags(); ?>
+              </ul>
+            </div>
+            <div class="contact-icons">
+              <ul class="list-inline">
+                <li><a href="tel:+31714071961" class="contact-icon tel-bar" title="<?= __('Bel ons!', 'dunepebbler'); ?>"><i class="fa fa-phone" aria-hidden="true"></i>  <span class="">071 - 40 719 61</span></a></li>
+                <li><a href="mailto:ivo@dunepebbler.nl" class="contact-icon launch-mail" title="<?= __('Mail ons!', 'dunepebbler'); ?>"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="#" class="contact-icon launch-search open-search" title="<?= __('Zoeken', 'dunepebbler'); ?>"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              </ul>
+            </div>
+            <div class="hamburger hamburger--squeeze">
+              <div class="hamburger-box">
+                <div class="hamburger-inner"></div> 
+              </div>
+            </div> 
+            <a href="/" class="logo <?= (!get_post_thumbnail_id() ) ? "black" : ""; ?>">
+              <img src="<?php echo get_template_directory_uri(); ?>/img/DunePebbler 2020.svg" class="svg" />
+            </a>
+            <a href="/" class="logo-icon">
+              <img src="<?php echo get_template_directory_uri(); ?>/img/dp-icon.svg" class="svg" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+

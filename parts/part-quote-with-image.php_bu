@@ -1,0 +1,24 @@
+<?php
+$content = get_sub_field('content');
+$image = get_sub_field('afbeelding');
+?>
+<section class="quote">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <?php if( $image ): ?>
+                <div class="background-image should-animate remove__animate animate__fadeInCenter">
+                    <img src="<?= get_webp($image['url']); ?>"  alt="" loading="lazy">
+                </div>
+                <?php endif; ?>
+                
+                <div class="inner-content"
+                    data-inner-animation="ml13" 
+                    data-inner-animation-on="blockquote > *"
+                    >
+                    <?= $content; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,468 @@
+var $grid, projectGrid, newsGrid, projectNewsGrid;
+$(document).ready(function () {
+  startBxSlider();
+  startGlobalGrid();
+  startSmartSelect();
+  setGridListeners();
+  setOnScrollDownClickedListener();
+  setMoreLessFixGrid();
+  setOnMenuBlur();
+  setDataToggleListener();
+  setOnImageLoadedGrid();
+  setOnSearch();
+  onSvgLoad();
+  gridFetch();
+  startInstaFeed();
+  startOwlSlider();
+  getBrowserDetails();
+  setFormListeners();
+  wrapIframe();
+  fillVacForm();
+  setNewsLetterToggle();
+  jQuery('[data-src]').each(function () {
+    jQuery(this).attr('src', jQuery(this).data('src'));
+  })
+});
+
+$(window).scroll(function () {
+  setOnWindowScrolled();
+});
+
+function setNewsLetterToggle() {
+//  jQuery('.newsletter-popup').on('click', function (e) {
+//    if (!jQuery(this).hasClass('closed')) return;
+//    if (jQuery(e.target).hasClass('open')) return;
+//    e.preventDefault();
+//
+//    // remove the class closed
+//    jQuery(this).removeClass('closed');
+//  })
+  $('.close-popup').on('click', function () {
+    $(this).toggleClass('open');
+    $('.newsletter-popup').toggleClass('open');
+    $('.open-pop').toggleClass('upside');
+    e.preventDefault();
+  });
+  
+  $('.newsletter-popup h2').on('click', function () {
+    $('.newsletter-popup').toggleClass('open');
+    $('.open-pop').toggleClass('upside');
+    e.preventDefault();
+  });
+  
+}
+
+function fillVacForm() {
+  jQuery('[name=vac]').val(postTitle);
+}
+
+function setFormListeners() {
+  jQuery('#send-contact-form').on('click', function () {
+    // do something
+    jQuery('.wpcf7-form').submit();
+
+    setTimeout(function () {
+      if (jQuery('form [aria-invalid="true"]').length > 0)
+        return;
+      window.location.href = "/bedankt-voor-je-interesse-in-dune-pebbler/";
+    }, 1000)
+  });
+
+  jQuery('[name^=acceptance-contact]').on('change', function () {
+    // show send button
+    jQuery('#send-contact-form').toggleClass('show');
+    $('#send-contact-form').prop('disabled', false);
+  });
+
+  jQuery('#send-apply-form').on('click', function () {
+    // do something
+    jQuery('.wpcf7-form').submit();
+    setTimeout(function () {
+      if (jQuery('form [aria-invalid="true"]').length > 0)
+        return;
+      window.location.href = "/zo-we-zullen-je-sollicitatie-beoordelen-en-heel-snel-contact-met-je-opnemen/";
+    }, 1000)
+    // window.location.href = "/bedankt-voor-je-interesse-in-dune-pebbler/";
+  });
+
+  jQuery('[name^=acceptance-apply]').on('change', function () {
+    // show send button
+    jQuery('#send-apply-form').toggleClass('show');
+    $('#send-apply-form').prop('disabled', false);
+  });
+}
+
+function getBrowserDetails() {
+  // Get Browser version
+  var browser = '';
+  var browserVersion = 0;
+
+  if (/Opera[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+    browser = 'Opera';
+  } else if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
+    browser = 'MSIE';
+  } else if (/Navigator[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+    browser = 'Netscape';
+  } else if (/Chrome[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+    browser = 'Chrome';
+  } else if (/Safari[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+    browser = 'Safari';
+    /Version[\/\s](\d+\.\d+)/.test(navigator.userAgent);
+    browserVersion = new Number(RegExp.$1);
+  } else if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+    browser = 'Firefox';
+  }
+  if (browserVersion === 0) {
+    browserVersion = parseFloat(new Number(RegExp.$1));
+  }
+
+  jQuery('.browserversion').html(browser + ", versie: " + browserVersion);
+}
+
+function startInstaFeed() {
+  if (jQuery('#instafeed').length == 0)
+    return;
+
+  var feed = new Instafeed({
+    get: 'user',
+    userId: '3536216882',
+    accessToken: 'IGQVJYanBYeTh4MXMxVUhpcEREdFozN2JlMURDTEZA1akpWY1VaTDFGeHdZAempJMFdJd3Y2bnlJclhWcVRuUmw4STU2VVduOHdDbWNDc2VDVkVYc09ZATXc3bUJJQmNLVW9lU2JGSWZA5UmhrWWZAnUVpWRgZDZD',
+    template: '<div class="item instagram"><figure><a href="{{link}}" target="_blank"><img src="{{image}}" class="img-responsive"></a></figure><p>{{caption}}</p></div>',
+    limit: 1,
+    resolution: 'standard_resolution',
+    after: function () {
+      $('.instafeed').each(function (index, el) {
+        var count = index + 1;
+
+        $(el).addClass('item-' + count);
+
+        $(el).find('img, a').css({'max-width': '100%'})
+      });
+    }
+  });
+
+  feed.run();
+}
+
+function setOnWindowScrolled() {
+  var a = 10;
+  var pos = $(window).scrollTop();
+  if (pos > a) {
+    $("header").addClass('scrolled');
+  } else {
+    $("header").removeClass('scrolled');
+  }
+}
+
+function startOwlSlider() {
+  jQuery('.-owl-slider-').each(function () {
+    var element = jQuery(this);
+    var options = {
+      loop: true,
+      items: 5,
+      margin: 5,
+      nav: false,
+      lazyload: true,
+      autoplay: true,
+      responsive: {
+        // breakpoint from 0 up
+        0: {
+          nav: true,
+          items: 2
+        },
+        480: {
+          nav: true,
+          items: 3
+        },
+        768: {
+          nav: false,
+          items: 4
+        },
+        992: {
+          nav: false,
+          items: 5
+        }
+      }
+    };
+
+    element.owlCarousel(options);
+  });
+}
+
+function startBxSlider() {
+  $('.slider').bxSlider({
+    auto: true,
+    controls: false,
+    pager: true,
+    captions: true,
+    mode: 'fade',
+    pause: 3500,
+    speed: 800
+  });
+}
+
+function startGlobalGrid() {
+  $grid = $('.grid').masonry({
+    itemSelector: '.grid-item',
+    percentPosition: true,
+    columnWidth: '.grid-sizer',
+    stagger: 30
+  });
+}
+
+function startSmartSelect() {
+  jQuery('.filters select').each(function () {
+    jQuery(this).smartSelect({
+      defaultText: jQuery(this).find('option').first().text(),
+      closeText: "Sluiten"
+    });
+  });
+}
+
+function setGridListeners() {
+  // set listener for the grid
+  jQuery('.filters select').on('change', function () {
+    filterGrid();
+  });
+
+  jQuery('.filters input').on('keyup', function () {
+    filterGrid();
+  });
+}
+
+function setOnMenuBlur() {
+  jQuery(document.body).on('keyup', function (e) {
+
+    if (e.keyCode != 27)
+      return;
+
+    jQuery('.navigation, .navigation .main-nav').removeClass('active');
+    jQuery('main, footer').removeClass('blurred');
+    jQuery('.hamburger').removeClass('is-active');
+
+  });
+
+  jQuery('.navigation').on('click', function (e) {
+    if (!jQuery(this).hasClass('active'))
+      return;
+
+    // check if we have clicked the navigation itself
+    if (jQuery(e.target).parents('#menu-primary-menu').length > 0)
+      return;
+
+    jQuery('.navigation, .navigation .main-nav').removeClass('active');
+    jQuery('main, footer').removeClass('blurred');
+    jQuery('.hamburger').removeClass('is-active');
+  });
+}
+
+function setOnScrollDownClickedListener() {
+  jQuery('.scroll-downs').on('click', function () {
+    jQuery('html, body').animate({scrollTop: jQuery(this).parents('section').next().offset().top - 50});
+  })
+}
+
+function setMoreLessFixGrid() {
+  // fix less and more 
+  $('.team-member .less-more').on('click', function (e) {
+    var targetGigante = $('.gigante');
+    var element = $(this).parents('.team-member');
+    var hadClass = element.find('.member-content').hasClass('open');
+
+    // remove gigante class
+    $('.gigante').removeClass('gigante');
+
+    // remove class everywhere
+    $('.team-member').find('.member-content').removeClass('open');
+
+    // check if we had the class
+    if (!hadClass)
+      element.find('.member-content').addClass('open');
+
+    //
+    if (!hadClass)
+      element.parents('.grid-item').addClass('gigante');
+
+    // if we haven't got the class, just stop :3
+    if (hadClass) {
+      targetGigante.css({'margin-bottom': 0});
+
+      setTimeout(function () {
+        $grid.masonry('layout');
+      }, 400);
+      return;
+    }
+
+    setTimeout(function () {
+      element.parents('.gigante').css({'margin-bottom': 60});
+      $grid.masonry('layout');
+    }, 400);
+    $grid.masonry('layout');
+  });
+}
+
+function gridFetch() {
+  var type = $('.project-grid').not('.ignore').length > 0 ? 'projects' : 'nieuws';
+  type = ($('.vacature-grid').length > 0) ? 'vacatures' : type
+
+  projectNewsGrid = $('.project-grid').length > 0 ? $('.project-grid') : $('.news-grid');
+  projectNewsGrid = ($('.vacature-grid').length > 0) ? $('.vacature-grid') : projectNewsGrid
+
+  if (projectNewsGrid.hasClass('ignore')) {
+    return;
+  }
+
+  jQuery.ajax({
+    url: ajaxurl,
+    dataType: 'json',
+    data: {
+      action: "get_" + type
+    },
+    success: function (result) {
+      // make this dynamic.
+      // i want 1 function to handle more grids.
+      // add items
+      projectNewsGrid.append(result.html);
+
+      // hide loader
+      projectNewsGrid.find('.loader').hide();
+
+      // init project grid
+      projectNewsGrid = projectNewsGrid.masonry({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        columnWidth: '.grid-sizer',
+        stagger: 30
+      });
+
+      projectNewsGrid.imagesLoaded().progress(function () {
+        projectNewsGrid.masonry('layout');
+      });
+    }
+  })
+}
+
+function setOnImageLoadedGrid() {
+  // layout Masonry after each image loads
+  $grid.imagesLoaded().progress(function () {
+    $grid.masonry('layout');
+  });
+
+}
+
+function setDataToggleListener() {
+  jQuery('[data-toggle]').on('click', function (e) {
+    e.preventDefault();
+    var targetToToggle = jQuery(this).data('toggle');
+    jQuery(targetToToggle).stop().slideToggle();
+  });
+}
+
+function filterGrid() {
+  var filters = [];
+  var grid = projectNewsGrid;
+
+  // map filters
+  jQuery('.filters .filter-group').each(function () {
+    var element = jQuery(this).find('input, select');
+    var targetName = element.attr('name');
+    var targets = jQuery('.' + targetName);
+
+    filters.push({
+      name: targetName,
+      value: element.val().toLowerCase(),
+    });
+
+    // show the element again
+    jQuery('.grid-item').removeClass('hide');
+  });
+
+  // apply filters
+  // we loop filters first, because 'and' condition
+  for (var i = 0; i < filters.length; i++) {
+    var filter = filters[i]; // get current filter
+
+    // loop through grid items that are shown
+    jQuery('.grid-item').not('.hide').each(function () {
+      var filterTarget = jQuery(this).find("." + filter.name);
+
+      if (filter.value == '') {
+        return; // we do not need to filter
+      }
+
+      // check if we have a filter target
+      if (filterTarget.length == 0) {
+        jQuery(this).addClass('hide');
+        return;
+      }
+
+      // we can check on our condition
+      if (filterTarget.text().trim().indexOf(filter.value) < 0) {
+        jQuery(this).addClass('hide');
+      }
+    });
+  }
+
+  grid.masonry('layout');
+}
+
+function onSvgLoad() {
+  jQuery('img.svg').each(function () {
+    var $img = jQuery(this);
+    var imgID = $img.attr('id');
+    var imgClass = $img.attr('class');
+    var imgURL = $img.attr('src');
+
+    jQuery.get(imgURL, function (data) {
+      // Get the SVG tag, ignore the rest
+      var $svg = jQuery(data).find('svg');
+
+      // Add replaced image's ID to the new SVG
+      if (typeof imgID !== 'undefined') {
+        $svg = $svg.attr('id', imgID);
+      }
+      // Add replaced image's classes to the new SVG
+      if (typeof imgClass !== 'undefined') {
+        $svg = $svg.attr('class', imgClass + ' replaced-svg');
+      }
+
+      // Remove any invalid XML tags as per http://validator.w3.org
+      $svg = $svg.removeAttr('xmlns:a');
+
+      // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
+      if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+        $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+      }
+
+      // Replace image with new SVG
+      $img.replaceWith($svg);
+
+    }, 'xml');
+
+  });
+}
+
+function setOnSearch() {
+  jQuery('.launch-search, .btn-search-close').on('click', function (e) {
+    e.preventDefault();
+
+    jQuery('.search-screen').toggleClass('active');
+  });
+}
+
+// Hamburger menu functionaliteit
+// verander onderstaande classes van is-active naar active om weer op te pakken (werkt niet lekker nog), hamburger class naar is-active
+jQuery(".hamburger").each(function (i, e) {
+  var hamburger = jQuery(e);
+
+  hamburger.on("click", function () {
+    $('.main-nav').toggleClass("active");
+    $('nav').toggleClass("active");
+    $('main').toggleClass("blurred");
+    $('footer').toggleClass("blurred");
+  });
+});
+
+function wrapIframe() {
+  $(".content-block iframe, .intro-content iframe").wrap("<div class='embed-container'></div>");
+}

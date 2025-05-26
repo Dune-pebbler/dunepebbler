@@ -1,0 +1,38 @@
+{
+  "name": "dunepebbler",
+  "version": "0.1.0",
+  "description": "Template",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "del": "^4.1.1",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-ext-replace": "^0.2.0",
+    "gulp-header": "^1.8.12",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-htmlsplit": "^1.1.1",
+    "gulp-insert": "^0.5.0",
+    "gulp-insert-lines": "0.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-remove-code": "^1.0.2",
+    "gulp-remove-html": "^1.1.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-replace-task": "^0.11.0",
+    "gulp-util": "^3.0.7",
+    "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dunepebbler/HTML-to-wordpress-gulp.git"
+  },
+  "author": "dunepebbler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dunepebbler/HTML-to-wordpress-gulp/issues"
+  },
+  "homepage": "https://github.com/dunepebbler/HTML-to-wordpress-gulp"
+}

@@ -1,0 +1,437 @@
+.newsletter-popup {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  z-index: 10;
+  background-color: $kleur1;
+  padding: 30px 20px;
+  text-align: center;
+  -webkit-border-radius: 15px 0px 0px 0px;
+  -moz-border-radius: 15px 0px 0px 0px;
+  border-radius: 15px 0px 0px 0px;
+  -webkit-box-shadow: -5px -5px 10px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: -5px -5px 10px 5px rgba(0, 0, 0, 0.25);
+  transition: 230ms ease all;
+  max-height: 100vh;
+  overflow: auto;
+  z-index: 99999;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 16px;
+    line-height: 20px;
+    box-shadow: none;
+  }
+
+  &.popup-hidden {
+    display: none;
+  }
+
+  .open-pop {
+    transform: rotate(180deg);
+    transition: all 0.2s;
+
+    &.upside {
+      transform: rotate(0);
+    }
+  }
+
+  .open-pop {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  // we have a closed popup, only show the header
+  transform: translateY(calc(100% - 50px));
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  > h2 {
+    transform: translateY(-25px);
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .close-popup {
+    top: 10px;
+
+    .open {
+      display: none;
+    }
+
+    .closed {
+      display: block;
+    }
+  }
+
+  &.open {
+    transform: translateY(0);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .close-popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &:hover {
+      cursor: pointer;
+
+      i {
+        color: $black;
+        -webkit-transition: 0.3s all;
+        -moz-transition: 0.3s all;
+        transition: 0.3s all;
+      }
+    }
+
+    .open {
+      display: block;
+    }
+
+    .closed {
+      display: none;
+    }
+
+    i {
+      background-color: $kleur1;
+      -webkit-transition: 0.3s all;
+      -moz-transition: 0.3s all;
+      transition: 0.3s all;
+    }
+  }
+
+  h2 {
+    color: $white;
+    font-size: 28px;
+    line-height: 42px;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .popup-content {
+    color: $white;
+    margin: 10px 0;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .newsletter-form {
+    text-align: left;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="submit"] {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: $kleur3;
+    }
+
+    .ajax-loader {
+      display: none;
+    }
+
+    .acceptance-news {
+      .wpcf7-acceptance {
+        .wpcf7-list-item {
+          input[type="checkbox"] {
+          }
+
+          .wpcf7-list-item-label {
+            a {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+
+  @media (max-width: $screen-sm-max) {
+    display: block;
+  }
+
+  &.overlay-off {
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    transition: 0.5s all;
+  }
+}
+
+footer {
+  transition: ease-in-out 0.3s all;
+  transform: scale(1);
+  background-color: $kleur4;
+
+  &.footer-en {
+    padding-top: 40px;
+  }
+
+  p {
+    color: $text-color;
+  }
+
+  svg {
+    width: 120px;
+
+    .st0 {
+      fill: $black;
+    }
+  }
+
+  a {
+    color: $kleur1;
+    font-weight: 500;
+
+    &:hover {
+      color: $kleur1;
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      margin-bottom: 5px;
+
+      a {
+        color: $text-color;
+      }
+    }
+
+    &.menu {
+      li {
+        a {
+          font-weight: 300 !important;
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          &:before {
+            content: "›";
+            display: inline-block;
+            width: 10px;
+            margin-right: 15px;
+            color: $kleur1;
+          }
+        }
+      }
+    }
+  }
+
+  .social-media li {
+    background-color: transparent;
+    transition: all 0.3s;
+
+    a {
+      border-radius: 50px;
+      background-color: $black;
+      color: $kleur4;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+
+      i {
+        color: $kleur4;
+        background-color: transparent;
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        border: 1px solid $kleur1;
+
+        i {
+          background-color: $kleur1;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    background-color: $black;
+    margin-top: 60px;
+
+    .footer-rights {
+      width: 100%;
+      padding: 30px 0px 10px;
+      text-align: center;
+      color: $white;
+
+      p,
+      a {
+        color: $white;
+        font-size: 14px;
+      }
+
+      a {
+        &:hover {
+          color: $kleur1;
+        }
+      }
+    }
+  }
+
+  .menu-footer-menu-container {
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .footer-newsletter {
+    background-color: #e7e7e7;
+    padding: 0px 25px 15px;
+    color: #fff;
+
+    p {
+      color: #000;
+      font-family: source-code-pro, monospace;
+
+      &:after {
+        content: "•";
+        font-family: monospace;
+        color: #65c1c2;
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 40px;
+      }
+    }
+
+    input[type="email"] {
+      color: #65c1c2;
+      position: relative;
+      z-index: 2;
+      padding: 10px;
+      width: 100%;
+      background: #fff;
+      border: 0;
+      border-bottom: 1px solid #fff;
+      text-transform: capitalize;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    [type="submit"] {
+      width: 100%;
+    }
+
+    .wpcf7-list-item {
+      margin: 15px 0;
+
+      .wpcf7-list-item-label {
+        color: #000;
+      }
+    }
+  }
+
+  .newsletter {
+    text-align: center;
+    padding: 60px 30px;
+    margin-bottom: 40px;
+    background-color: $kleur1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .wpcf7-acceptance {
+      margin-top: 20px;
+      display: block;
+
+      @media (max-width: $screen-md-max) {
+        margin-top: 0;
+      }
+    }
+
+    a {
+      color: $white;
+    }
+
+    h3 {
+      color: $white;
+      margin-top: 0;
+      margin-bottom: 50px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      border: none;
+      margin: 0 5px;
+      padding: 20px 20px;
+      @include border-radius(3px);
+
+      @media (max-width: $screen-md-max) {
+        width: 100%;
+        display: block;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .btn {
+      background-color: transparent;
+      border: 1px solid $white;
+      padding: 16px 20px;
+      vertical-align: middle;
+
+      &.show {
+        cursor: pointer;
+      }
+
+      &:hover {
+        // background-color: $black;
+      }
+
+      @media (max-width: $screen-md-max) {
+        width: 100%;
+        display: block;
+      }
+    }
+
+    &.newsletter-spacing {
+      padding: 30px;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 15px;
+      }
+    }
+  }
+}
+.dp-newsletter_wrapper {
+  .gform-body {
+    width: 600px !important;
+    @media screen and (max-width: 576px) {
+      width: 400px !important;
+    }
+  }
+}

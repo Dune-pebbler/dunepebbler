@@ -1,0 +1,17 @@
+.is-active .acf-fields > div {
+  display: block;
+}
+
+.is-inactive {
+  opacity: 0.3;
+  transition: 230ms ease opacity;
+}
+.is-inactive:hover {
+  opacity: 1;
+}
+.is-inactive .acf-fields > div {
+  display: none;
+}
+.is-inactive .acf-fields > div[data-name=type_section] {
+  display: block;
+}/*# sourceMappingURL=admin.css.map */
