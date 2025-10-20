@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php 
+// hi from claude
+get_header(); ?>
 <main>
   <?php
   the_post();
