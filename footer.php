@@ -1,63 +1,63 @@
 <?php
 if (is_front_page() && ICL_LANGUAGE_CODE == 'nl' && get_field('toon_popup', 'option')):
   $popup_image = get_field('popup_image', 'option'); ?>
-  <div id="newsletter-popup" class="newsletter-popup">
+<div id="newsletter-popup" class="newsletter-popup">
     <div class="close-popup">
-      <i class="open-pop fas fa-chevron-down"></i>
+        <i class="open-pop fas fa-chevron-down"></i>
     </div>
     <h2><?php the_field('popup_titel', 'option'); ?></h2>
     <img src="<?= $popup_image; ?>" alt="Nieuwsbrief afbeelding" loading="lazy" />
     <div class="popup-content">
-      <?php the_field('popup_inhoud', 'option'); ?>
+        <?php the_field('popup_inhoud', 'option'); ?>
     </div>
     <div class="newsletter-form">
-      <?= do_shortcode('[gravityform id="1" title="false"]'); ?>
+        <?= do_shortcode('[gravityform id="1" title="false"]'); ?>
     </div>
-  </div>
-  <!-- <div class="popup-overlay"></div> -->
-  <?php
+</div>
+<!-- <div class="popup-overlay"></div> -->
+<?php
 endif;
 ?>
 <footer class="<?= "footer-" . ICL_LANGUAGE_CODE; ?>">
-  <?php if (ICL_LANGUAGE_CODE == 'nl' && get_the_ID() != 619): ?>
+    <?php if (ICL_LANGUAGE_CODE == 'nl' && get_the_ID() != 619): ?>
     <div class="newsletter">
-      <h3><?= __('Blijf op de hoogte! Schrijf je in voor onze nieuwsbrief.', 'dunepebbler'); ?></h3>
-      <?= do_shortcode('[gravityform id="3" title="false"]'); ?>
+        <!-- <h3><?= /* __('Blijf op de hoogte! Schrijf je in voor onze nieuwsbrief.', 'dunepebbler'); ?></h3>
+      <?= do_shortcode('[gravityform id="3" title="false"]'); */ ?> -->
     </div>
-  <?php endif; ?>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <?php wp_nav_menu('menu=Footer menu'); ?>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <?php wp_nav_menu('menu=Footer menu rechts'); ?>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" class="svg" />
-        <p style="margin-top: 25px;"><strong><?= __('New business:', 'dunepebbler'); ?></strong><br>
-          Ivo Vittali<br>
-          <a href="mailto:ivo@dunepebbler.nl" title="Mail Ivo!">ivo@dunepebbler.nl</a>
-        </p><br>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <p>
-          De Maessloot 6<br>
-          2231 PX Rijnsburg<br>
-          (gemeente Katwijk)<br>
-          <?= __('Nederland', 'dunepebbler'); ?><br>
-          <a href="tel:+31714071961" class="class" title="<?= __('Bel ons!', 'dunepebbler'); ?>">+31 71 - 40
-            719 61</a>
-        </p>
-        <?php get_template_part('part-social-icons'); ?>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
+    <?php endif; ?>
     <div class="container">
-      <div class="row">
-        <div class="footer-rights">
-          <?php
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <?php wp_nav_menu('menu=Footer menu'); ?>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <?php wp_nav_menu('menu=Footer menu rechts'); ?>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" class="svg" />
+                <p style="margin-top: 25px;"><strong><?= __('New business:', 'dunepebbler'); ?></strong><br>
+                    Ivo Vittali<br>
+                    <a href="mailto:ivo@dunepebbler.nl" title="Mail Ivo!">ivo@dunepebbler.nl</a>
+                </p><br>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <p>
+                    De Maessloot 6<br>
+                    2231 PX Rijnsburg<br>
+                    (gemeente Katwijk)<br>
+                    <?= __('Nederland', 'dunepebbler'); ?><br>
+                    <a href="tel:+31714071961" class="class" title="<?= __('Bel ons!', 'dunepebbler'); ?>">+31 71 - 40
+                        719 61</a>
+                </p>
+                <?php get_template_part('part-social-icons'); ?>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="footer-rights">
+                    <?php
           $privacystatement = "/privacy-statement";
           $disclaimer = "/disclaimer";
 
@@ -66,46 +66,47 @@ endif;
             $disclaimer = "/en/disclaimer";
           }
           ?>
-          <p>Dune Pebbler © <?php echo date('Y'); ?> - <?= __('alle rechten voorbehouden', 'dunepebbler'); ?>
-            - <a href="<?= $disclaimer; ?>" title="Disclaimer"><?= __('disclaimer', 'dunepebbler'); ?></a> -
-            <a href="<?= $privacystatement; ?>"
-              title="Privacy Statement"><?= __('privacy statement', 'dunepebbler'); ?></a>
-          </p>
+                    <p>Dune Pebbler © <?php echo date('Y'); ?> - <?= __('alle rechten voorbehouden', 'dunepebbler'); ?>
+                        - <a href="<?= $disclaimer; ?>" title="Disclaimer"><?= __('disclaimer', 'dunepebbler'); ?></a> -
+                        <a href="<?= $privacystatement; ?>"
+                            title="Privacy Statement"><?= __('privacy statement', 'dunepebbler'); ?></a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </footer>
 
 <?php if ($post->post_name === 'kerst'): ?>
-  <div class="snowflakes" aria-hidden="true">
+<div class="snowflakes" aria-hidden="true">
     <?php for ($i = 0; $i < 20; $i++): ?>
-      <div class="snowflake">
+    <div class="snowflake">
         ❅
-      </div>
-      <div class="snowflake">
+    </div>
+    <div class="snowflake">
         ❆
-      </div>
+    </div>
     <?php endfor; ?>
-  </div>
+</div>
 <?php endif; ?>
 
 <div class="search-screen">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <form id="searchform" role="search" method="get" action="/">
-          <div class="input-group"><input class="form-control" id="s" type="text"
-              placeholder="<?php _e('Zoeken naar...', 'dp'); ?>" name="s" /><span class="input-group-btn"><button
-                class="btn-search-close" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>
-            </span><span class="input-group-btn"><button class="btn-search" type="submit"><i
-                  class="fa fa-search"></i></button>
-            </span>
-          </div>
-        </form>
-      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form id="searchform" role="search" method="get" action="/">
+                    <div class="input-group"><input class="form-control" id="s" type="text"
+                            placeholder="<?php _e('Zoeken naar...', 'dp'); ?>" name="s" /><span
+                            class="input-group-btn"><button class="btn-search-close" type="button"><i
+                                    class="fa fa-times" aria-hidden="true"></i></button>
+                        </span><span class="input-group-btn"><button class="btn-search" type="submit"><i
+                                    class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/jQuery.js" type="text/javascript"></script>
@@ -118,11 +119,11 @@ endif;
 <script src="<?php echo get_template_directory_uri(); ?>/js/SmartSelect.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWmPbcw8nX_m95u86N3k6gN7iNzhnpY3A&callback=initializeInteractiveMaps&v=weekly"
-  async></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWmPbcw8nX_m95u86N3k6gN7iNzhnpY3A&callback=initializeInteractiveMaps&v=weekly"
+    async></script>
 <script
-  src="<?php echo get_template_directory_uri(); ?>/js/main.js?v=<?= filemtime(get_template_directory() . "/js/main.js"); ?>"
-  type="text/javascript"></script>
+    src="<?php echo get_template_directory_uri(); ?>/js/main.js?v=<?= filemtime(get_template_directory() . "/js/main.js"); ?>"
+    type="text/javascript"></script>
 <?php wp_footer(); ?>
 </body>
 
